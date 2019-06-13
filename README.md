@@ -26,23 +26,23 @@ Things you may want to cover:
 
 ## 初期設定
 
-前提として、dockerとdocker-composeが入っていること
-docker : 
-docker-compose : 
+* 前提として、dockerとdocker-composeが入っていること
+  * docker : https://www.docker.com/
+  * docker-compose : http://docs.docker.jp/compose/toc.html
 
-−　git clone した環境で以下のコマンドを実行しbuildする
+* git clone した環境で以下のコマンドを実行しbuildする
 
 ```
 $docker-compose build
 ```
 
-− docker-composeにて、imageを実行する
+* docker-composeにて、imageを実行する
 
 ```
 $docker-compose up
 ```
 
-−　実行後に別のコンソールにて以下のコマンドでdbをCreateする
+* 実行後に別のコンソールにて以下のコマンドでdbをCreateする
 
 ```
 docker-compose run web rake db:create
