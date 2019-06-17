@@ -4,6 +4,7 @@ Rails.application.routes.draw do
         namespace :user do
           resources :items
         end
+        resources :name_judgment
     end
   end
 end
