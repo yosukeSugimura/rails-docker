@@ -1,0 +1,2 @@
+class ResultStringCount < ApplicationRecord
+end

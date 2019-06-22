@@ -1,0 +1,2 @@
+class ResultMaster < ApplicationRecord
+end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unicode: MyString
+  chara: MyString
+  count: 1
+
+two:
+  unicode: MyString
+  chara: MyString
+  count: 1

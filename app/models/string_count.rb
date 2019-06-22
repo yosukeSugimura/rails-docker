@@ -1,0 +1,2 @@
+class StringCount < ApplicationRecord
+end

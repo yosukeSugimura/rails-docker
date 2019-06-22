@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  count: 1
+  result_detaile_master_id: 1
+  result_master_id: 1
+
+two:
+  count: 1
+  result_detaile_master_id: 1
+  result_master_id: 1

@@ -1,0 +1,2 @@
+class ResultCommentMaster < ApplicationRecord
+end
