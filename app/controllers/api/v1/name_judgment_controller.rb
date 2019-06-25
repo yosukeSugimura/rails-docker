@@ -1,20 +1,16 @@
 class Api::V1::NameJudgmentController < ApplicationController
-    require 'net/http'
+    include NameJudgment
 
     def index
-        string= '亜'
-        test = {
-            test:change_unicode_point(string)
-        }
-        render json: test
-    end
+        if params[:name].present?
+            name = params[:name].to_s
+        else
+            render json: { error:"名前を入力してください" }
+            return
+        end
 
-    #　文字のうにコード変換
-    #
-    def change_unicode_point(string)
-        arr_unicode = string.force_encoding("utf-8").unpack("U*")
-        unicode = sprintf("%#x", arr_unicode[0])
-        unicode[0,2] = "U+"
-        unicode
+        unicode = change_unicode_point(name)
+        count = all_count_get(unicode)
+        render json: name_count_result(count)
     end
 end

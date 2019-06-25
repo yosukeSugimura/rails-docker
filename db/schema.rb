@@ -15,29 +15,29 @@ ActiveRecord::Schema.define(version: 2019_06_22_103516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "rank_masters", force: :cascade do |t|
+    t.string "rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "result_comment_masters", force: :cascade do |t|
-    t.text "comment"
-    t.string "woman_comment"
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "result_detaile_masters", force: :cascade do |t|
-    t.string "result_comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "result_masters", force: :cascade do |t|
-    t.string "result"
+    t.text "detaile"
+    t.string "woman_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "result_string_counts", force: :cascade do |t|
     t.integer "count"
-    t.integer "result_detaile_master_id"
-    t.integer "result_master_id"
+    t.integer "result_comment_master_id"
+    t.integer "rank_master_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
