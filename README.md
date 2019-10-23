@@ -48,4 +48,11 @@ $docker-compose up
 docker-compose run web rake db:create
 ```
 
+* 実行後に別のコンソールにて以下のコマンドでdbへ初期ファイルを挿入
+
+```
+docker-compose run web rake db:create
+```
+
+
 `localhost:3000`によりアクセス
