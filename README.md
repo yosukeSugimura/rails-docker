@@ -1,58 +1,38 @@
-# README
+# Rails-Docker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このリポジトリは、RailsアプリケーションをDocker上で構築・運用するためのテンプレートです。ローカル環境から本番環境まで一貫した環境を提供し、簡単にセットアップできます。
 
-Things you may want to cover:
+## 前提条件
 
-* Ruby version
+以下がインストールされている必要があります：
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.jp/compose/toc.html)
 
-* System dependencies
+---
 
-* Configuration
+## セットアップ手順
 
-* Database creation
+1. **リポジトリのクローン**
+   ```bash
+   git clone https://github.com/yosukeSugimura/rails-docker.git
+   cd rails-docker
+   ```
 
-* Database initialization
+2. **Dockerイメージのビルド**
+   ```bash
+   docker-compose build
+   ```
 
-* How to run the test suite
+3. **コンテナの起動**
+   ```bash
+   docker-compose up -d
+   ```
 
-* Services (job queues, cache servers, search engines, etc.)
+4. **データベースの作成**
+   ```bash
+   docker-compose run web rake db:create
+   docker-compose run web rake db:migrate
+   ```
 
-* Deployment instructions
-
-* ...
-# rails-docker
-
-## 初期設定
-
-* 前提として、dockerとdocker-composeが入っていること
-  * docker : https://www.docker.com/
-  * docker-compose : http://docs.docker.jp/compose/toc.html
-
-* git clone した環境で以下のコマンドを実行しbuildする
-
-```
-$docker-compose build
-```
-
-* docker-composeにて、imageを実行する
-
-```
-$docker-compose up
-```
-
-* 実行後に別のコンソールにて以下のコマンドでdbをCreateする
-
-```
-docker-compose run web rake db:create
-```
-
-* 実行後に別のコンソールにて以下のコマンドでdbへ初期ファイルを挿入
-
-```
-docker-compose run web rake db:create
-```
-
-
-`localhost:3000`によりアクセス
+5. **アプリケーションにアクセス**
+   ブラウザで `http://localhost:3000` にアクセスしてください。
