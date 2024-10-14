@@ -9,9 +9,17 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
   db:
     image: postgres:13
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
       - postgres-data:/var/lib/postgresql/data
+
 volumes:
   postgres-data:
