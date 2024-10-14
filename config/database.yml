@@ -17,9 +17,10 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
+  host: localhost
+  port: 5432  # これを明示的に追加
   username: postgres
-  password:
+  password: password
   pool: 5
 
 development:

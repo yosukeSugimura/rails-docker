@@ -36,3 +36,11 @@
 
 5. **アプリケーションにアクセス**
    ブラウザで `http://localhost:3000` にアクセスしてください。
+
+### 環境での起動方法
+
+- 開発環境での起動:
+  `docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d`
+
+- 本番環境での起動:
+  `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
