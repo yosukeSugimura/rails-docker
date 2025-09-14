@@ -66,6 +66,7 @@ group :test do
   # webdrivers を追加
   gem 'webdrivers'
   gem 'simplecov', require: false
+  gem 'sqlite3', '~> 1.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

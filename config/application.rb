@@ -30,42 +30,55 @@ module RailsDocker
     } if Rails.env.production?
 
     # CORS configuration (if needed for API)
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '/api/*',
-                 headers: :any,
-                 methods: [:get, :post, :put, :patch, :delete, :options, :head],
-                 expose: ['X-Total-Count', 'X-Page', 'X-Per-Page']
-      end
+    if defined?(Rack::Cors)
+      config.middleware.insert_before 0, Rack::Cors do
+        allow do
+          origins '*'
+          resource '/api/*',
+                   headers: :any,
+                   methods: [:get, :post, :put, :patch, :delete, :options, :head],
+                   expose: ['X-Total-Count', 'X-Page', 'X-Per-Page']
+        end
 
-      allow do
-        origins '*'
-        resource '/health*',
-                 headers: :any,
-                 methods: [:get, :options, :head]
+        allow do
+          origins '*'
+          resource '/health*',
+                   headers: :any,
+                   methods: [:get, :options, :head]
+        end
       end
-    end if defined?(Rack::Cors)
+    end
 
     # Active Job configuration
     config.active_job.queue_adapter = :sidekiq
 
     # Cache store configuration
-    config.cache_store = :redis_cache_store, {
-      url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/1'),
-      expires_in: 1.hour,
-      namespace: 'rails_docker_cache'
-    }
+    if defined?(Redis)
+      config.cache_store = :redis_cache_store, {
+        url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/1'),
+        expires_in: 1.hour,
+        namespace: 'rails_docker_cache'
+      }
+    else
+      config.cache_store = :memory_store, { size: 64.megabytes }
+    end
 
-    # Session store configuration
-    config.session_store :redis_store, {
-      servers: [ENV.fetch('REDIS_URL', 'redis://localhost:6379/2')],
-      expire_in: 30.days,
-      key: '_rails_docker_session',
-      secure: Rails.env.production?,
-      httponly: true,
-      same_site: :lax
-    }
+    # Session store configuration (fallback to cookie store if Redis not available)
+    if defined?(ActionDispatch::Session::RedisStore)
+      config.session_store :redis_store,
+        servers: [ENV.fetch('REDIS_URL', 'redis://localhost:6379/2')],
+        expire_in: 30.days,
+        key: '_rails_docker_session',
+        secure: Rails.env.production?,
+        httponly: true,
+        same_site: :lax
+    else
+      config.session_store :cookie_store,
+        key: '_rails_docker_session',
+        secure: Rails.env.production?,
+        httponly: true,
+        same_site: :lax
+    end
 
     # Log configuration
     config.log_level = ENV.fetch('LOG_LEVEL', 'info').to_sym

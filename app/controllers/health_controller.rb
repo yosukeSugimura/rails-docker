@@ -3,7 +3,6 @@
 class HealthController < ApplicationController
   # Skip authentication and CSRF for health checks
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!, if: :defined_authenticate_user?
 
   # Basic health check endpoint
   def show
@@ -188,7 +187,4 @@ class HealthController < ApplicationController
     end
   end
 
-  def defined_authenticate_user?
-    defined?(authenticate_user!)
-  end
 end
